@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokedexTraining">
         <activity
-            android:name=".ui.PokemonListActivity"
+            android:name=".view.PokemonListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

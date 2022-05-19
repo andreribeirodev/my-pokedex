@@ -34,6 +34,7 @@ class PokemonListActivity : AppCompatActivity() {
                 call: Call<PokemonListResponse>,
                 response: Response<PokemonListResponse>
             ) {
+                val result = response.body()
             }
 
             override fun onFailure(call: Call<PokemonListResponse>, t: Throwable) {

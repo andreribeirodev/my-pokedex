@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface iPokemonApiClient {
+interface iPokemonClient {
 
     @GET("pokemon")
     fun getPokemonsListFromApi(@Query("limit") limit: Int): Call<PokemonListResponse>

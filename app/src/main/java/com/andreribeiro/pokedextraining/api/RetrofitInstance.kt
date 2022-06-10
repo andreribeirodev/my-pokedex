@@ -13,7 +13,7 @@ class RetrofitInstance {
                 .build()
         }
         val pokemonService by lazy {
-            retrofit.create(iPokemonApiClient::class.java)
+            retrofit.create(iPokemonClient::class.java)
         }
     }
 }

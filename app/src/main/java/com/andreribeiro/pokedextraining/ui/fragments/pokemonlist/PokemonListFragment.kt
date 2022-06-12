@@ -6,15 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.andreribeiro.pokedextraining.api.RetrofitInstance
 import com.andreribeiro.pokedextraining.databinding.FragmentPokemonListBinding
 import com.andreribeiro.pokedextraining.repository.PokemonRepository
+import com.andreribeiro.pokedextraining.ui.adapter.AdapterPokemonList
 import com.andreribeiro.pokedextraining.viewmodel.PokemonListViewModel
 
 class PokemonListFragment : Fragment() {
 
     private var _binding: FragmentPokemonListBinding? = null
     private val binding: FragmentPokemonListBinding get() = _binding!!
+
+    private val pokemonListAdapter by lazy { AdapterPokemonList() }
 
     // instancia viewModel utilizando o factory
     private val pokemonServiceApi by lazy { RetrofitInstance.pokemonService }
@@ -33,13 +37,21 @@ class PokemonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupObservers()
+        setupRecyclerView()
+        setupObserversPokemonList()
     }
 
-    private fun setupObservers() {
+    private fun setupRecyclerView() {
+        binding.rvPokemonList.run {
+            adapter = pokemonListAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+    }
+
+    private fun setupObserversPokemonList() {
         mPokemonListViewModel.getPokemons(50)
         mPokemonListViewModel.pokemons.observe(viewLifecycleOwner) {
-            binding.tvPokemonName.text = it[0].name
+            pokemonListAdapter.submitList(it)
         }
     }
 }

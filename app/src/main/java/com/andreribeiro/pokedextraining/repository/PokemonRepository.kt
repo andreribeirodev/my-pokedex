@@ -6,10 +6,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class PokemonRepository(private val pokemonService: IPokemonClient) : IPokemonRepository {
+class PokemonRepository(
+    private val pokemonService: IPokemonClient
+) : IPokemonRepository {
+
     override suspend fun getPokemonsList(limit: Int): Response<PokemonListResponse> {
         return withContext(Dispatchers.IO) {
-            pokemonService.getPokemonsListFromApi(limit = limit)
+            pokemonService.getPokemonsList(limit = limit)
         }
     }
 }
